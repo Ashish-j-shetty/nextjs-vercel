@@ -5,8 +5,11 @@ import { sql } from '@vercel/postgres';
 import { AuthError } from 'next-auth';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { unstable_noStore as noStore } from 'next/cache';
 
-import { z } from 'zod';
+import { promise, z } from 'zod';
+import { CustomersTableType } from './definitions';
+import { resolve } from 'path';
 
 export async function authenticate(
   prevState: string | undefined,
@@ -118,5 +121,19 @@ export async function deleteInvoice(id: string) {
     return {
       message: 'Database Error: Failed to Delete Invoice.',
     };
+  }
+}
+
+export async function getCustomers() {
+  noStore();
+
+  try {
+    const customers = await sql<CustomersTableType>`
+    SELECT * from customers
+    `;
+
+    return customers.rows;
+  } catch (error) {
+    throw new Error('Failed to fetch customers');
   }
 }

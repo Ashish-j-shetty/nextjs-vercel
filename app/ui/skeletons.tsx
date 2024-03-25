@@ -139,6 +139,23 @@ export function TableRowSkeleton() {
   );
 }
 
+export function CustomerRowSkeleton() {
+  return (
+    <tr className="mb-4 flex w-full  items-center rounded-md bg-white p-2 hover:bg-sky-100">
+      {/* Customer Name and Image */}
+      <td className="relative overflow-hidden whitespace-nowrap py-3 pl-6 pr-3">
+        <div className="flex items-center gap-3">
+          <div className="h-8 w-8 rounded-full bg-gray-100"></div>
+          <div className="h-6 w-24 rounded bg-gray-100"></div>
+        </div>
+      </td>
+      {/* Email */}
+      <td className="whitespace-nowrap px-3 py-3">
+        <div className="h-6 w-32 rounded bg-gray-100"></div>
+      </td>
+    </tr>
+  );
+}
 export function InvoicesMobileSkeleton() {
   return (
     <div className="mb-2 w-full rounded-md bg-white p-4">
